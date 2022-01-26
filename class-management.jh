@@ -50,6 +50,7 @@ enum DayOfWeek {
 
 relationship ManyToOne {
 	Course{school} to School,
+    Student{school} to School,
     Batch{course} to Course,
     Batch{center} to Center,
     FinanceEntry{student} to Student,
