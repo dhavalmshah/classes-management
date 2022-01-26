@@ -122,7 +122,7 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 {schools
                   ? schools.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.schoolName}
                       </option>
                     ))
                   : null}
