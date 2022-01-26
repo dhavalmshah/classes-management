@@ -1,0 +1,26 @@
+{
+  "classesManagementApp": {
+    "mockSchedule": {
+      "home": {
+        "title": "Mock Schedules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mock Schedule",
+        "createOrEditLabel": "Create or edit a Mock Schedule",
+        "notFound": "No Mock Schedules found"
+      },
+      "created": "A new Mock Schedule is created with identifier {{ param }}",
+      "updated": "A Mock Schedule is updated with identifier {{ param }}",
+      "deleted": "A Mock Schedule is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mock Schedule {{ id }}?"
+      },
+      "detail": {
+        "title": "Mock Schedule"
+      },
+      "id": "ID",
+      "day": "Day",
+      "timing": "Timing",
+      "batch": "Batch"
+    }
+  }
+}

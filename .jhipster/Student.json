@@ -1,0 +1,45 @@
+{
+  "applications": "*",
+  "changelogDate": "20220126142438",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "student",
+  "fields": [
+    {
+      "fieldName": "studentName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "Standard",
+      "fieldValues": "V,VI,VII,VIII,IX,X"
+    },
+    {
+      "fieldName": "studentPhone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentPhone",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Student",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "enrollment",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "enrollment",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

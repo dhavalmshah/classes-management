@@ -1,0 +1,26 @@
+{
+  "classesManagementApp": {
+    "mockSchedule": {
+      "home": {
+        "title": "MockSchedules",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Mock Schedule बनाएँ",
+        "createOrEditLabel": "Mock Schedule बनाएँ या संपादित करें",
+        "notFound": "No Mock Schedules found"
+      },
+      "created": "एक नया Mock Schedule [identifier: {{ param }}] तैयार है",
+      "updated": "एक Mock Schedule [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Mock Schedule [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Mock Schedule [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Mock Schedule"
+      },
+      "id": "ID",
+      "day": "Day",
+      "timing": "Timing",
+      "batch": "Batch"
+    }
+  }
+}

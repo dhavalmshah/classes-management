@@ -1,0 +1,27 @@
+{
+  "classesManagementApp": {
+    "enrollment": {
+      "home": {
+        "title": "Enrollments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Enrollment बनाएँ",
+        "createOrEditLabel": "Enrollment बनाएँ या संपादित करें",
+        "notFound": "No Enrollments found"
+      },
+      "created": "एक नया Enrollment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Enrollment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Enrollment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Enrollment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Enrollment"
+      },
+      "id": "ID",
+      "notes": "Notes",
+      "fees": "Fees",
+      "student": "Student",
+      "course": "Course"
+    }
+  }
+}

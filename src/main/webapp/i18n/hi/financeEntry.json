@@ -1,0 +1,27 @@
+{
+  "classesManagementApp": {
+    "financeEntry": {
+      "home": {
+        "title": "FinanceEntries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Finance Entry बनाएँ",
+        "createOrEditLabel": "Finance Entry बनाएँ या संपादित करें",
+        "notFound": "No Finance Entries found"
+      },
+      "created": "एक नया Finance Entry [identifier: {{ param }}] तैयार है",
+      "updated": "एक Finance Entry [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Finance Entry [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Finance Entry [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Finance Entry"
+      },
+      "id": "ID",
+      "transactionDate": "Transaction Date",
+      "amount": "Amount",
+      "notes": "Notes",
+      "student": "Student"
+    }
+  }
+}

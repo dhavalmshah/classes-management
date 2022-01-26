@@ -1,0 +1,29 @@
+{
+  "classesManagementApp": {
+    "student": {
+      "home": {
+        "title": "Students",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Student बनाएँ",
+        "createOrEditLabel": "Student बनाएँ या संपादित करें",
+        "notFound": "No Students found"
+      },
+      "created": "एक नया Student [identifier: {{ param }}] तैयार है",
+      "updated": "एक Student [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Student [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Student [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Student"
+      },
+      "id": "ID",
+      "studentName": "Student Name",
+      "standard": "Standard",
+      "studentPhone": "Student Phone",
+      "parentName": "Parent Name",
+      "parentPhone": "Parent Phone",
+      "enrollment": "Enrollment"
+    }
+  }
+}

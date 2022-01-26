@@ -1,0 +1,28 @@
+{
+  "classesManagementApp": {
+    "batch": {
+      "home": {
+        "title": "Batches",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Batch बनाएँ",
+        "createOrEditLabel": "Batch बनाएँ या संपादित करें",
+        "notFound": "No Batches found"
+      },
+      "created": "एक नया Batch [identifier: {{ param }}] तैयार है",
+      "updated": "एक Batch [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Batch [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Batch [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Batch"
+      },
+      "id": "ID",
+      "duration": "Duration",
+      "seats": "Seats",
+      "mockSchedule": "Mock Schedule",
+      "course": "Course",
+      "center": "Center"
+    }
+  }
+}

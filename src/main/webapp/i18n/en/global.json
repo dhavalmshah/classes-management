@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "school": "School",
+        "center": "Center",
+        "student": "Student",
+        "course": "Course",
+        "batch": "Batch",
+        "financeEntry": "Finance Entry",
+        "mockSchedule": "Mock Schedule",
+        "enrollment": "Enrollment",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

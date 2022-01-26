@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20220126142443",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "enrollment",
+  "fields": [
+    {
+      "fieldName": "notes",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Enrollment",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "financeEntry",
+      "otherEntityRelationshipName": "enrollment",
+      "ownerSide": true,
+      "relationshipName": "fees",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "enrollment",
+      "relationshipName": "student",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "enrollment",
+      "relationshipName": "course",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
