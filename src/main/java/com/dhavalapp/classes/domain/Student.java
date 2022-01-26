@@ -48,6 +48,9 @@ public class Student implements Serializable {
     @JsonIgnoreProperties(value = { "fees", "student", "course" }, allowSetters = true)
     private Set<Enrollment> enrollments = new HashSet<>();
 
+    @ManyToOne
+    private School school;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -156,6 +159,19 @@ public class Student implements Serializable {
     public Student removeEnrollment(Enrollment enrollment) {
         this.enrollments.remove(enrollment);
         enrollment.setStudent(null);
+        return this;
+    }
+
+    public School getSchool() {
+        return this.school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+    public Student school(School school) {
+        this.setSchool(school);
         return this;
     }
 

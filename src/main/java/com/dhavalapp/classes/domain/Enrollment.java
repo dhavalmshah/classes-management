@@ -33,7 +33,7 @@ public class Enrollment implements Serializable {
     private FinanceEntry fees;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "enrollments" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enrollments", "school" }, allowSetters = true)
     private Student student;
 
     @ManyToOne

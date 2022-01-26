@@ -37,7 +37,7 @@ public class FinanceEntry implements Serializable {
     private String notes;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "enrollments" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enrollments", "school" }, allowSetters = true)
     private Student student;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

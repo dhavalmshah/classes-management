@@ -29,6 +29,7 @@
     <include file="config/liquibase/changelog/20220126142441_added_entity_constraints_FinanceEntry.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220126142442_added_entity_constraints_MockSchedule.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220126142443_added_entity_constraints_Enrollment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220126142438_added_entity_constraints_Student.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

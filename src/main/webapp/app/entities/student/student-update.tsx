@@ -4,6 +4,8 @@ import { Button, Row, Col, FormText } from 'reactstrap';
 import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { ISchool } from 'app/shared/model/school.model';
+import { getEntities as getSchools } from 'app/entities/school/school.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './student.reducer';
 import { IStudent } from 'app/shared/model/student.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -16,6 +18,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
+  const schools = useAppSelector(state => state.school.entities);
   const studentEntity = useAppSelector(state => state.student.entity);
   const loading = useAppSelector(state => state.student.loading);
   const updating = useAppSelector(state => state.student.updating);
@@ -31,6 +34,8 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
     } else {
       dispatch(getEntity(props.match.params.id));
     }
+
+    dispatch(getSchools({}));
   }, []);
 
   useEffect(() => {
@@ -43,6 +48,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
     const entity = {
       ...studentEntity,
       ...values,
+      school: schools.find(it => it.id.toString() === values.school.toString()),
     };
 
     if (isNew) {
@@ -58,6 +64,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
       : {
           standard: 'V',
           ...studentEntity,
+          school: studentEntity?.school?.id,
         };
 
   return (
@@ -129,6 +136,22 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 data-cy="parentPhone"
                 type="text"
               />
+              <ValidatedField
+                id="student-school"
+                name="school"
+                data-cy="school"
+                label={translate('classesManagementApp.student.school')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {schools
+                  ? schools.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/student" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

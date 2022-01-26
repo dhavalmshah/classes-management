@@ -59,6 +59,10 @@ export const StudentDetail = (props: RouteComponentProps<{ id: string }>) => {
             </span>
           </dt>
           <dd>{studentEntity.parentPhone}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.student.school">School</Translate>
+          </dt>
+          <dd>{studentEntity.school ? studentEntity.school.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/student" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

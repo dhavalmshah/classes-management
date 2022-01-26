@@ -39,6 +39,12 @@
       "otherEntityRelationshipName": "student",
       "relationshipName": "enrollment",
       "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "school",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "school",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"
