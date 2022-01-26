@@ -130,7 +130,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 {courses
                   ? courses.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.courseName}
                       </option>
                     ))
                   : null}
@@ -146,7 +146,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 {centers
                   ? centers.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.centerName}
                       </option>
                     ))
                   : null}

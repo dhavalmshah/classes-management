@@ -44,7 +44,7 @@ export const CourseDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dt>
             <Translate contentKey="classesManagementApp.course.school">School</Translate>
           </dt>
-          <dd>{courseEntity.school ? courseEntity.school.id : ''}</dd>
+          <dd>{courseEntity.school ? courseEntity.school.schoolName : ''}</dd>
         </dl>
         <Button tag={Link} to="/course" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}
