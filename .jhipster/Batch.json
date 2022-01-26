@@ -1,0 +1,47 @@
+{
+  "applications": "*",
+  "changelogDate": "20220126142440",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "batch",
+  "fields": [
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "30"
+    },
+    {
+      "fieldName": "seats",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Batch",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "mockSchedule",
+      "otherEntityRelationshipName": "batch",
+      "relationshipName": "mockSchedule",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "batch",
+      "relationshipName": "course",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "center",
+      "otherEntityRelationshipName": "batch",
+      "relationshipName": "center",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

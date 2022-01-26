@@ -1,0 +1,24 @@
+{
+  "classesManagementApp": {
+    "school": {
+      "home": {
+        "title": "Schools",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया School बनाएँ",
+        "createOrEditLabel": "School बनाएँ या संपादित करें",
+        "notFound": "No Schools found"
+      },
+      "created": "एक नया School [identifier: {{ param }}] तैयार है",
+      "updated": "एक School [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "School [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "School [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "School"
+      },
+      "id": "ID",
+      "schoolName": "School Name"
+    }
+  }
+}

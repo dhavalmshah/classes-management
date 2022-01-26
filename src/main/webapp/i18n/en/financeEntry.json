@@ -1,0 +1,27 @@
+{
+  "classesManagementApp": {
+    "financeEntry": {
+      "home": {
+        "title": "Finance Entries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Finance Entry",
+        "createOrEditLabel": "Create or edit a Finance Entry",
+        "notFound": "No Finance Entries found"
+      },
+      "created": "A new Finance Entry is created with identifier {{ param }}",
+      "updated": "A Finance Entry is updated with identifier {{ param }}",
+      "deleted": "A Finance Entry is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Finance Entry {{ id }}?"
+      },
+      "detail": {
+        "title": "Finance Entry"
+      },
+      "id": "ID",
+      "transactionDate": "Transaction Date",
+      "amount": "Amount",
+      "notes": "Notes",
+      "student": "Student"
+    }
+  }
+}
