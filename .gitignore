@@ -63,7 +63,6 @@ local.properties
 *.ipr
 *.ids
 *.orig
-classes/
 out/
 
 ######################
