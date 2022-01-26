@@ -85,7 +85,7 @@ export const Student = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{student.studentPhone}</td>
                   <td>{student.parentName}</td>
                   <td>{student.parentPhone}</td>
-                  <td>{student.school ? <Link to={`school/${student.school.id}`}>{student.school.id}</Link> : ''}</td>
+                  <td>{student.school ? <Link to={`school/${student.school.id}`}>{student.school.schoolName}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${student.id}`} color="info" size="sm" data-cy="entityDetailsButton">
