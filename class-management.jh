@@ -1,0 +1,72 @@
+
+entity School {
+	schoolName String required
+}
+
+entity Center {
+	centerName String required
+}
+
+entity Student {
+	studentName String required,
+    standard Standard,
+    studentPhone String,
+    parentName String,
+    parentPhone String
+}
+
+enum Standard {
+	V, VI, VII, VIII, IX, X
+}
+
+entity Course {
+	courseName String required,
+    courseCost BigDecimal required min(500),
+}
+
+entity Batch {
+	duration Integer required min(30),
+    seats Integer required min(1)
+}
+
+entity FinanceEntry {
+	transactionDate LocalDate required,
+    amount BigDecimal required,
+    notes String,
+}
+
+entity MockSchedule {
+	day DayOfWeek required,
+    timing Instant required
+}
+
+entity Enrollment {
+	notes String required
+}
+
+enum DayOfWeek {
+	Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+}
+
+relationship ManyToOne {
+	Course{school} to School,
+    Batch{course} to Course,
+    Batch{center} to Center,
+    FinanceEntry{student} to Student,
+}
+
+relationship OneToMany {
+	Batch to MockSchedule{batch},
+    Student to Enrollment{student},
+    Course to Enrollment{course}
+}
+
+relationship OneToOne {
+    Enrollment{fees} to FinanceEntry
+}
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
