@@ -90,6 +90,11 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
     if (slotInfo.action === 'doubleClick') setMockSchedules(mockSchedules.concat(getMockScheduleFromSlotInfo(slotInfo)));
   };
 
+  const handleEventRemoval = e => {
+    // eslint-disable-next-line
+    console.log(events, e);
+  };
+
   const getMockScheduleFromSlotInfo = (slotInfo: any) => {
     const evFromInfo: IMockSchedule = {};
     evFromInfo.batch = batchEntity;
@@ -213,9 +218,10 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 defaultView={Views.WEEK}
                 scrollToTime={new Date()}
                 defaultDate={new Date()}
-                onSelectEvent={event => alert(event.title)}
+                // onSelectEvent={event => alert(event.title)}
                 onSelectSlot={handleSelect}
                 slotPropGetter={applyStyles}
+                onDoubleClickEvent={handleEventRemoval}
               />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/batch" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
@@ -243,7 +249,9 @@ export default BatchUpdate;
 function getEventsFromMockSchedule(batchEntity: IBatch, mockSchedules: IMockSchedule[]): eve[] {
   const ms = mockSchedules?.map(m => {
     const start: Date = getDateForCalendarFromMockSchedule(m.day, new Date(m.timing));
-    return { title: batchEntity.course.courseName, start, end: moment(start).add(batchEntity.duration, 'm').toDate() };
+    return batchEntity?.course
+      ? { title: batchEntity.course.courseName, start, end: moment(start).add(batchEntity.duration, 'm').toDate(), mockSchedule: m }
+      : {};
   });
   return ms;
 }
