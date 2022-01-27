@@ -46,7 +46,9 @@ public class BatchResource {
      * {@code POST  /batches} : Create a new batch.
      *
      * @param batch the batch to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new batch, or with status {@code 400 (Bad Request)} if the batch has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new batch, or with status {@code 400 (Bad Request)} if the
+     *         batch has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/batches")
@@ -55,6 +57,7 @@ public class BatchResource {
         if (batch.getId() != null) {
             throw new BadRequestAlertException("A new batch cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        batch.getMockSchedules().forEach(s -> s.setBatch(batch));
         Batch result = batchService.save(batch);
         return ResponseEntity
             .created(new URI("/api/batches/" + result.getId()))
@@ -65,11 +68,13 @@ public class BatchResource {
     /**
      * {@code PUT  /batches/:id} : Updates an existing batch.
      *
-     * @param id the id of the batch to save.
+     * @param id    the id of the batch to save.
      * @param batch the batch to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated batch,
-     * or with status {@code 400 (Bad Request)} if the batch is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the batch couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated batch,
+     *         or with status {@code 400 (Bad Request)} if the batch is not valid,
+     *         or with status {@code 500 (Internal Server Error)} if the batch
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/batches/{id}")
@@ -86,7 +91,7 @@ public class BatchResource {
         if (!batchRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        batch.getMockSchedules().forEach(s -> s.setBatch(batch));
         Batch result = batchService.save(batch);
         return ResponseEntity
             .ok()
@@ -95,14 +100,17 @@ public class BatchResource {
     }
 
     /**
-     * {@code PATCH  /batches/:id} : Partial updates given fields of an existing batch, field will ignore if it is null
+     * {@code PATCH  /batches/:id} : Partial updates given fields of an existing
+     * batch, field will ignore if it is null
      *
-     * @param id the id of the batch to save.
+     * @param id    the id of the batch to save.
      * @param batch the batch to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated batch,
-     * or with status {@code 400 (Bad Request)} if the batch is not valid,
-     * or with status {@code 404 (Not Found)} if the batch is not found,
-     * or with status {@code 500 (Internal Server Error)} if the batch couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated batch,
+     *         or with status {@code 400 (Bad Request)} if the batch is not valid,
+     *         or with status {@code 404 (Not Found)} if the batch is not found,
+     *         or with status {@code 500 (Internal Server Error)} if the batch
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/batches/{id}", consumes = { "application/json", "application/merge-patch+json" })
@@ -133,7 +141,8 @@ public class BatchResource {
     /**
      * {@code GET  /batches} : get all the batches.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of batches in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of batches in body.
      */
     @GetMapping("/batches")
     public List<Batch> getAllBatches() {
@@ -145,7 +154,8 @@ public class BatchResource {
      * {@code GET  /batches/:id} : get the "id" batch.
      *
      * @param id the id of the batch to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the batch, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the batch, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/batches/{id}")
     public ResponseEntity<Batch> getBatch(@PathVariable Long id) {

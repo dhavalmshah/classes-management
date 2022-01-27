@@ -13,11 +13,20 @@ import { IBatch } from 'app/shared/model/batch.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
+import moment from 'moment';
+import { Calendar, Views, momentLocalizer, Event as eve } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './batch.css';
+
+const localizer = momentLocalizer(moment);
 
 export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const dispatch = useAppDispatch();
 
   const [isNew] = useState(!props.match.params || !props.match.params.id);
+  const slotStyle = { className: 'super-time-slot' };
+
+  const applyStyles = () => slotStyle;
 
   const courses = useAppSelector(state => state.course.entities);
   const centers = useAppSelector(state => state.center.entities);
@@ -45,6 +54,22 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
       handleClose();
     }
   }, [updateSuccess]);
+
+  const ev: eve = {};
+  const [events, setEvents] = useState([]);
+  // eslint-disable-next-line
+  const handleSelect = (slotInfo: any) => {
+    console.log(slotInfo);
+    setEvents(events.concat([getEventFromSlotInfo(slotInfo)]));
+    console.log(events);
+  };
+  const getEventFromSlotInfo = (slotInfo: any) => {
+    const evFromInfo: eve = {};
+    evFromInfo.start = slotInfo.start;
+    evFromInfo.title = batchEntity.course.courseName;
+    evFromInfo.end = moment(slotInfo.start).add(batchEntity.duration, 'm').toDate();
+    return evFromInfo;
+  };
 
   const saveEntity = values => {
     const entity = {
@@ -85,6 +110,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
+              <h1>{events.length}</h1>
               {!isNew ? (
                 <ValidatedField
                   name="id"
@@ -151,6 +177,19 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                     ))
                   : null}
               </ValidatedField>
+              <Calendar
+                selectable
+                localizer={localizer}
+                events={events}
+                views={['week']}
+                toolbar={false}
+                defaultView={Views.WEEK}
+                scrollToTime={new Date()}
+                defaultDate={new Date()}
+                onSelectEvent={event => alert(event.title)}
+                onSelectSlot={handleSelect}
+                slotPropGetter={applyStyles}
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/batch" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

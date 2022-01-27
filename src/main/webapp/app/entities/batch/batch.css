@@ -1,0 +1,6 @@
+.super-time-slot:hover {
+  background-color: #ffc107;
+}
+.rbc-events-container {
+  pointer-events: none;
+}
