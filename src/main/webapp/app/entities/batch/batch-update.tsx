@@ -63,26 +63,31 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   useEffect(() => {
     setEvents(getEventsFromMockSchedule(batchEntity, mockSchedules) || []);
-    // eslint-disable-next-line
-    console.log('mockSchedules useEffect', mockSchedules, events);
   }, [mockSchedules]);
 
   useEffect(() => {
-    // eslint-disable-next-line
-    console.log('batchEntity useEffect', batchEntity);
     setMockSchedules(batchEntity?.mockSchedules);
   }, [batchEntity]);
 
   const handleSelect = (slotInfo: any) => {
-    setMockSchedules(mockSchedules.concat(getMockScheduleFromSlotInfo(slotInfo)));
-  };
-
-  const getEventFromSlotInfo = (slotInfo: any) => {
-    const evFromInfo: eve = {};
-    evFromInfo.start = slotInfo.start;
-    evFromInfo.title = batchEntity.course.courseName;
-    evFromInfo.end = moment(slotInfo.start).add(batchEntity.duration, 'm').toDate();
-    return evFromInfo;
+    // sample slotInfo Object
+    //   {
+    //     "slots": [
+    //         "2022-01-26T05:30:00.000Z",
+    //         "2022-01-26T06:00:00.000Z"
+    //     ],
+    //     "start": "2022-01-26T05:30:00.000Z",
+    //     "end": "2022-01-26T06:00:00.000Z",
+    //     "resourceId": null,
+    //     "action": "doubleClick",
+    //     "box": {
+    //         "x": 961,
+    //         "y": 1085,
+    //         "clientX": 961,
+    //         "clientY": 246
+    //     }
+    // }
+    if (slotInfo.action === 'doubleClick') setMockSchedules(mockSchedules.concat(getMockScheduleFromSlotInfo(slotInfo)));
   };
 
   const getMockScheduleFromSlotInfo = (slotInfo: any) => {
@@ -240,9 +245,6 @@ function getEventsFromMockSchedule(batchEntity: IBatch, mockSchedules: IMockSche
     const start: Date = getDateForCalendarFromMockSchedule(m.day, new Date(m.timing));
     return { title: batchEntity.course.courseName, start, end: moment(start).add(batchEntity.duration, 'm').toDate() };
   });
-
-  // eslint-disable-next-line
-  console.log('getEventsFromMockSchedule', ms);
   return ms;
 }
 
@@ -250,9 +252,6 @@ function getDateForCalendarFromMockSchedule(day: DayOfWeek, timing: Date): Date 
   const d: Date = getDayOfThisWeek(day);
   d.setHours(timing.getHours());
   d.setMinutes(timing.getMinutes());
-
-  // eslint-disable-next-line
-  console.log('getDateForCalendarFromMockSchedule', d, timing);
   return d;
 }
 
@@ -260,7 +259,5 @@ function getDayOfThisWeek(day: DayOfWeek): any {
   const d = new Date();
   const currentDay = d.getDay();
   const givenDay = Object.keys(DayOfWeek).indexOf(day);
-  // eslint-disable-next-line
-  console.log('getDayOfThisWeek', day, currentDay, givenDay);
   return new Date(d.setDate(d.getDate() - currentDay + givenDay));
 }
