@@ -59,9 +59,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [events, setEvents] = useState([]);
   // eslint-disable-next-line
   const handleSelect = (slotInfo: any) => {
-    console.log(slotInfo);
     setEvents(events.concat([getEventFromSlotInfo(slotInfo)]));
-    console.log(events);
   };
   const getEventFromSlotInfo = (slotInfo: any) => {
     const evFromInfo: eve = {};
