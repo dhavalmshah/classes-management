@@ -88,10 +88,10 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
     isNew
       ? {}
       : {
-          ...batchEntity,
-          course: batchEntity?.course?.id,
-          center: batchEntity?.center?.id,
-        };
+        ...batchEntity,
+        course: batchEntity?.course?.id,
+        center: batchEntity?.center?.id,
+      };
 
   return (
     <div>
@@ -153,10 +153,10 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {courses
                   ? courses.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.courseName}
-                      </option>
-                    ))
+                    <option value={otherEntity.id} key={otherEntity.id}>
+                      {otherEntity.courseName}
+                    </option>
+                  ))
                   : null}
               </ValidatedField>
               <ValidatedField
@@ -169,10 +169,10 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {centers
                   ? centers.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.centerName}
-                      </option>
-                    ))
+                    <option value={otherEntity.id} key={otherEntity.id}>
+                      {otherEntity.centerName}
+                    </option>
+                  ))
                   : null}
               </ValidatedField>
               <Calendar
