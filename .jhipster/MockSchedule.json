@@ -9,7 +9,7 @@
       "fieldName": "day",
       "fieldType": "DayOfWeek",
       "fieldValidateRules": ["required"],
-      "fieldValues": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
+      "fieldValues": "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
     },
     {
       "fieldName": "timing",

@@ -32,8 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class MockScheduleResourceIT {
 
-    private static final DayOfWeek DEFAULT_DAY = DayOfWeek.Monday;
-    private static final DayOfWeek UPDATED_DAY = DayOfWeek.Tuesday;
+    private static final DayOfWeek DEFAULT_DAY = DayOfWeek.Sunday;
+    private static final DayOfWeek UPDATED_DAY = DayOfWeek.Monday;
 
     private static final Instant DEFAULT_TIMING = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIMING = Instant.now().truncatedTo(ChronoUnit.MILLIS);

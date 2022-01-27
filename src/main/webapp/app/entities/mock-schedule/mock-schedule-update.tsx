@@ -66,7 +66,7 @@ export const MockScheduleUpdate = (props: RouteComponentProps<{ id: string }>) =
           timing: displayDefaultDateTime(),
         }
       : {
-          day: 'Monday',
+          day: 'Sunday',
           ...mockScheduleEntity,
           timing: convertDateTimeFromServer(mockScheduleEntity.timing),
           batch: mockScheduleEntity?.batch?.id,
