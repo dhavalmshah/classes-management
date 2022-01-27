@@ -35,7 +35,7 @@ public class Batch implements Serializable {
     @Column(name = "seats", nullable = false)
     private Integer seats;
 
-    @OneToMany(mappedBy = "batch")
+    @OneToMany(mappedBy = "batch", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "batch" }, allowSetters = true)
     private Set<MockSchedule> mockSchedules = new HashSet<>();
@@ -145,7 +145,8 @@ public class Batch implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -160,7 +161,8 @@ public class Batch implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -168,9 +170,9 @@ public class Batch implements Serializable {
     @Override
     public String toString() {
         return "Batch{" +
-            "id=" + getId() +
-            ", duration=" + getDuration() +
-            ", seats=" + getSeats() +
-            "}";
+                "id=" + getId() +
+                ", duration=" + getDuration() +
+                ", seats=" + getSeats() +
+                "}";
     }
 }
