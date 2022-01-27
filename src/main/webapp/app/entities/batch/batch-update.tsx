@@ -17,6 +17,9 @@ import moment from 'moment';
 import { Calendar, Views, momentLocalizer, Event as eve } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './batch.css';
+import { batch } from 'react-redux';
+import { DayOfWeek } from 'app/shared/model/enumerations/day-of-week.model';
+import { IMockSchedule } from '../../shared/model/mock-schedule.model';
 
 const localizer = momentLocalizer(moment);
 
@@ -55,17 +58,38 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
   }, [updateSuccess]);
 
-  const ev: eve = {};
+  const [mockSchedules, setMockSchedules] = useState([]);
   const [events, setEvents] = useState([]);
-  // eslint-disable-next-line
+
+  useEffect(() => {
+    setEvents(getEventsFromMockSchedule(batchEntity, mockSchedules) || []);
+    // eslint-disable-next-line
+    console.log('mockSchedules useEffect', mockSchedules, events);
+  }, [mockSchedules]);
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    console.log('batchEntity useEffect', batchEntity);
+    setMockSchedules(batchEntity?.mockSchedules);
+  }, [batchEntity]);
+
   const handleSelect = (slotInfo: any) => {
-    setEvents(events.concat([getEventFromSlotInfo(slotInfo)]));
+    setMockSchedules(mockSchedules.concat(getMockScheduleFromSlotInfo(slotInfo)));
   };
+
   const getEventFromSlotInfo = (slotInfo: any) => {
     const evFromInfo: eve = {};
     evFromInfo.start = slotInfo.start;
     evFromInfo.title = batchEntity.course.courseName;
     evFromInfo.end = moment(slotInfo.start).add(batchEntity.duration, 'm').toDate();
+    return evFromInfo;
+  };
+
+  const getMockScheduleFromSlotInfo = (slotInfo: any) => {
+    const evFromInfo: IMockSchedule = {};
+    evFromInfo.batch = batchEntity;
+    evFromInfo.day = Object.values(DayOfWeek)[slotInfo.start.getDay()];
+    evFromInfo.timing = slotInfo.start;
     return evFromInfo;
   };
 
@@ -75,6 +99,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...values,
       course: courses.find(it => it.id.toString() === values.course.toString()),
       center: centers.find(it => it.id.toString() === values.center.toString()),
+      mockSchedules,
     };
 
     if (isNew) {
@@ -108,7 +133,6 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              <h1>{events.length}</h1>
               {!isNew ? (
                 <ValidatedField
                   name="id"
@@ -210,3 +234,33 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
 };
 
 export default BatchUpdate;
+
+function getEventsFromMockSchedule(batchEntity: IBatch, mockSchedules: IMockSchedule[]): eve[] {
+  const ms = mockSchedules?.map(m => {
+    const start: Date = getDateForCalendarFromMockSchedule(m.day, new Date(m.timing));
+    return { title: batchEntity.course.courseName, start, end: moment(start).add(batchEntity.duration, 'm').toDate() };
+  });
+
+  // eslint-disable-next-line
+  console.log('getEventsFromMockSchedule', ms);
+  return ms;
+}
+
+function getDateForCalendarFromMockSchedule(day: DayOfWeek, timing: Date): Date {
+  const d: Date = getDayOfThisWeek(day);
+  d.setHours(timing.getHours());
+  d.setMinutes(timing.getMinutes());
+
+  // eslint-disable-next-line
+  console.log('getDateForCalendarFromMockSchedule', d, timing);
+  return d;
+}
+
+function getDayOfThisWeek(day: DayOfWeek): any {
+  const d = new Date();
+  const currentDay = d.getDay();
+  const givenDay = Object.keys(DayOfWeek).indexOf(day);
+  // eslint-disable-next-line
+  console.log('getDayOfThisWeek', day, currentDay, givenDay);
+  return new Date(d.setDate(d.getDate() - currentDay + givenDay));
+}
