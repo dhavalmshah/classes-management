@@ -29,7 +29,13 @@
             <column name="parent_phone" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="school_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="year_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -58,6 +64,7 @@
             <column name="student_phone" type="string"/>
             <column name="parent_name" type="string"/>
             <column name="parent_phone" type="string"/>
+            <column name="notes" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

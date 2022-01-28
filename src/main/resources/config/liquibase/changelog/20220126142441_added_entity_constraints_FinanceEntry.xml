@@ -13,5 +13,17 @@
                                  constraintName="fk_finance_entry__student_id"
                                  referencedColumnNames="id"
                                  referencedTableName="student"/>
+
+        <addForeignKeyConstraint baseColumnNames="bank_id"
+                                 baseTableName="finance_entry"
+                                 constraintName="fk_finance_entry__bank_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bank"/>
+
+        <addForeignKeyConstraint baseColumnNames="year_id"
+                                 baseTableName="finance_entry"
+                                 constraintName="fk_finance_entry__year_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="year"/>
     </changeSet>
 </databaseChangeLog>

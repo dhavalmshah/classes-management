@@ -61,6 +61,12 @@ export const FinanceEntry = (props: RouteComponentProps<{ url: string }>) => {
                 <th>
                   <Translate contentKey="classesManagementApp.financeEntry.student">Student</Translate>
                 </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.financeEntry.bank">Bank</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.financeEntry.year">Year</Translate>
+                </th>
                 <th />
               </tr>
             </thead>
@@ -80,6 +86,8 @@ export const FinanceEntry = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{financeEntry.amount}</td>
                   <td>{financeEntry.notes}</td>
                   <td>{financeEntry.student ? <Link to={`student/${financeEntry.student.id}`}>{financeEntry.student.id}</Link> : ''}</td>
+                  <td>{financeEntry.bank ? <Link to={`bank/${financeEntry.bank.id}`}>{financeEntry.bank.id}</Link> : ''}</td>
+                  <td>{financeEntry.year ? <Link to={`year/${financeEntry.year.id}`}>{financeEntry.year.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${financeEntry.id}`} color="info" size="sm" data-cy="entityDetailsButton">

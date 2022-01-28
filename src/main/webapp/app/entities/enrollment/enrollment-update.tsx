@@ -8,8 +8,8 @@ import { IFinanceEntry } from 'app/shared/model/finance-entry.model';
 import { getEntities as getFinanceEntries } from 'app/entities/finance-entry/finance-entry.reducer';
 import { IStudent } from 'app/shared/model/student.model';
 import { getEntities as getStudents } from 'app/entities/student/student.reducer';
-import { ICourse } from 'app/shared/model/course.model';
-import { getEntities as getCourses } from 'app/entities/course/course.reducer';
+import { IBatch } from 'app/shared/model/batch.model';
+import { getEntities as getBatches } from 'app/entities/batch/batch.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './enrollment.reducer';
 import { IEnrollment } from 'app/shared/model/enrollment.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -23,7 +23,7 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
 
   const financeEntries = useAppSelector(state => state.financeEntry.entities);
   const students = useAppSelector(state => state.student.entities);
-  const courses = useAppSelector(state => state.course.entities);
+  const batches = useAppSelector(state => state.batch.entities);
   const enrollmentEntity = useAppSelector(state => state.enrollment.entity);
   const loading = useAppSelector(state => state.enrollment.loading);
   const updating = useAppSelector(state => state.enrollment.updating);
@@ -41,7 +41,7 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
 
     dispatch(getFinanceEntries({}));
     dispatch(getStudents({}));
-    dispatch(getCourses({}));
+    dispatch(getBatches({}));
   }, []);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
       ...values,
       fees: financeEntries.find(it => it.id.toString() === values.fees.toString()),
       student: students.find(it => it.id.toString() === values.student.toString()),
-      course: courses.find(it => it.id.toString() === values.course.toString()),
+      course: batches.find(it => it.id.toString() === values.course.toString()),
     };
 
     if (isNew) {
@@ -151,8 +151,8 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
                 type="select"
               >
                 <option value="" key="0" />
-                {courses
-                  ? courses.map(otherEntity => (
+                {batches
+                  ? batches.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

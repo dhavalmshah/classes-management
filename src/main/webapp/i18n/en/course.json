@@ -20,8 +20,11 @@
       "id": "ID",
       "courseName": "Course Name",
       "courseCost": "Course Cost",
-      "enrollment": "Enrollment",
-      "school": "School"
+      "duration": "Duration",
+      "seats": "Seats",
+      "notes": "Notes",
+      "school": "School",
+      "year": "Year"
     }
   }
 }

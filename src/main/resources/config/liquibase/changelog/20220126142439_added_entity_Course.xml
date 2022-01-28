@@ -20,7 +20,19 @@
             <column name="course_cost" type="decimal(21,2)">
                 <constraints nullable="false" />
             </column>
+            <column name="duration" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="seats" type="integer">
+                <constraints nullable="false" />
+            </column>
+            <column name="notes" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="school_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="year_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -46,6 +58,9 @@
             <column name="id" type="numeric"/>
             <column name="course_name" type="string"/>
             <column name="course_cost" type="numeric"/>
+            <column name="duration" type="numeric"/>
+            <column name="seats" type="numeric"/>
+            <column name="notes" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

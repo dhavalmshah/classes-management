@@ -26,6 +26,10 @@
     {
       "fieldName": "parentPhone",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,
@@ -44,6 +48,12 @@
       "otherEntityName": "school",
       "otherEntityRelationshipName": "student",
       "relationshipName": "school",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "year",
       "relationshipType": "many-to-one"
     }
   ],

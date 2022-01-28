@@ -19,5 +19,11 @@
                                  constraintName="fk_batch__center_id"
                                  referencedColumnNames="id"
                                  referencedTableName="center"/>
+
+        <addForeignKeyConstraint baseColumnNames="year_id"
+                                 baseTableName="batch"
+                                 constraintName="fk_batch__year_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="year"/>
     </changeSet>
 </databaseChangeLog>

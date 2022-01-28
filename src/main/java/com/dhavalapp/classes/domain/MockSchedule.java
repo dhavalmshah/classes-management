@@ -35,7 +35,7 @@ public class MockSchedule implements Serializable {
     private Instant timing;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "mockSchedules", "course", "center" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "mockSchedules", "enrollments", "course", "center", "year" }, allowSetters = true)
     private Batch batch;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

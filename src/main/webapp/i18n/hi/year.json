@@ -1,0 +1,24 @@
+{
+  "classesManagementApp": {
+    "year": {
+      "home": {
+        "title": "Years",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Year बनाएँ",
+        "createOrEditLabel": "Year बनाएँ या संपादित करें",
+        "notFound": "No Years found"
+      },
+      "created": "एक नया Year [identifier: {{ param }}] तैयार है",
+      "updated": "एक Year [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Year [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Year [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Year"
+      },
+      "id": "ID",
+      "year": "Year"
+    }
+  }
+}

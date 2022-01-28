@@ -53,6 +53,9 @@ public class StudentServiceImpl implements StudentService {
                 if (student.getParentPhone() != null) {
                     existingStudent.setParentPhone(student.getParentPhone());
                 }
+                if (student.getNotes() != null) {
+                    existingStudent.setNotes(student.getNotes());
+                }
 
                 return existingStudent;
             })

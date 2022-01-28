@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ISchool } from 'app/shared/model/school.model';
 import { getEntities as getSchools } from 'app/entities/school/school.reducer';
+import { IYear } from 'app/shared/model/year.model';
+import { getEntities as getYears } from 'app/entities/year/year.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './student.reducer';
 import { IStudent } from 'app/shared/model/student.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -19,6 +21,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const schools = useAppSelector(state => state.school.entities);
+  const years = useAppSelector(state => state.year.entities);
   const studentEntity = useAppSelector(state => state.student.entity);
   const loading = useAppSelector(state => state.student.loading);
   const updating = useAppSelector(state => state.student.updating);
@@ -36,6 +39,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getSchools({}));
+    dispatch(getYears({}));
   }, []);
 
   useEffect(() => {
@@ -49,6 +53,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...studentEntity,
       ...values,
       school: schools.find(it => it.id.toString() === values.school.toString()),
+      year: years.find(it => it.id.toString() === values.year.toString()),
     };
 
     if (isNew) {
@@ -65,6 +70,7 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
           standard: 'V',
           ...studentEntity,
           school: studentEntity?.school?.id,
+          year: studentEntity?.year?.id,
         };
 
   return (
@@ -137,6 +143,13 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 type="text"
               />
               <ValidatedField
+                label={translate('classesManagementApp.student.notes')}
+                id="student-notes"
+                name="notes"
+                data-cy="notes"
+                type="text"
+              />
+              <ValidatedField
                 id="student-school"
                 name="school"
                 data-cy="school"
@@ -146,6 +159,22 @@ export const StudentUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {schools
                   ? schools.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="student-year"
+                name="year"
+                data-cy="year"
+                label={translate('classesManagementApp.student.year')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {years
+                  ? years.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

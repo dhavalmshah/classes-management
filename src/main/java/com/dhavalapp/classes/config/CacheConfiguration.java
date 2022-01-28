@@ -59,6 +59,9 @@ public class CacheConfiguration {
             createCache(cm, com.dhavalapp.classes.domain.FinanceEntry.class.getName());
             createCache(cm, com.dhavalapp.classes.domain.MockSchedule.class.getName());
             createCache(cm, com.dhavalapp.classes.domain.Enrollment.class.getName());
+            createCache(cm, com.dhavalapp.classes.domain.Batch.class.getName() + ".enrollments");
+            createCache(cm, com.dhavalapp.classes.domain.Year.class.getName());
+            createCache(cm, com.dhavalapp.classes.domain.Bank.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

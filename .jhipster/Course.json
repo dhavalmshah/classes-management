@@ -15,6 +15,22 @@
       "fieldType": "BigDecimal",
       "fieldValidateRules": ["required", "min"],
       "fieldValidateRulesMin": "500"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "30"
+    },
+    {
+      "fieldName": "seats",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,
@@ -24,15 +40,15 @@
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityName": "enrollment",
-      "otherEntityRelationshipName": "course",
-      "relationshipName": "enrollment",
-      "relationshipType": "one-to-many"
-    },
-    {
       "otherEntityName": "school",
       "otherEntityRelationshipName": "course",
       "relationshipName": "school",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "year",
       "relationshipType": "many-to-one"
     }
   ],

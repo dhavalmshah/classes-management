@@ -18,11 +18,13 @@
         "title": "Batch"
       },
       "id": "ID",
-      "duration": "Duration",
-      "seats": "Seats",
+      "name": "Name",
+      "notes": "Notes",
       "mockSchedule": "Mock Schedule",
+      "enrollment": "Enrollment",
       "course": "Course",
-      "center": "Center"
+      "center": "Center",
+      "year": "Year"
     }
   }
 }

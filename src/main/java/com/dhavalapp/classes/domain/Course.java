@@ -1,10 +1,7 @@
 package com.dhavalapp.classes.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -35,13 +32,24 @@ public class Course implements Serializable {
     @Column(name = "course_cost", precision = 21, scale = 2, nullable = false)
     private BigDecimal courseCost;
 
-    @OneToMany(mappedBy = "course")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "fees", "student", "course" }, allowSetters = true)
-    private Set<Enrollment> enrollments = new HashSet<>();
+    @NotNull
+    @Min(value = 30)
+    @Column(name = "duration", nullable = false)
+    private Integer duration;
+
+    @NotNull
+    @Min(value = 1)
+    @Column(name = "seats", nullable = false)
+    private Integer seats;
+
+    @Column(name = "notes")
+    private String notes;
 
     @ManyToOne
     private School school;
+
+    @ManyToOne
+    private Year year;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -84,35 +92,43 @@ public class Course implements Serializable {
         this.courseCost = courseCost;
     }
 
-    public Set<Enrollment> getEnrollments() {
-        return this.enrollments;
+    public Integer getDuration() {
+        return this.duration;
     }
 
-    public void setEnrollments(Set<Enrollment> enrollments) {
-        if (this.enrollments != null) {
-            this.enrollments.forEach(i -> i.setCourse(null));
-        }
-        if (enrollments != null) {
-            enrollments.forEach(i -> i.setCourse(this));
-        }
-        this.enrollments = enrollments;
-    }
-
-    public Course enrollments(Set<Enrollment> enrollments) {
-        this.setEnrollments(enrollments);
+    public Course duration(Integer duration) {
+        this.setDuration(duration);
         return this;
     }
 
-    public Course addEnrollment(Enrollment enrollment) {
-        this.enrollments.add(enrollment);
-        enrollment.setCourse(this);
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Integer getSeats() {
+        return this.seats;
+    }
+
+    public Course seats(Integer seats) {
+        this.setSeats(seats);
         return this;
     }
 
-    public Course removeEnrollment(Enrollment enrollment) {
-        this.enrollments.remove(enrollment);
-        enrollment.setCourse(null);
+    public void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    public String getNotes() {
+        return this.notes;
+    }
+
+    public Course notes(String notes) {
+        this.setNotes(notes);
         return this;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public School getSchool() {
@@ -125,6 +141,19 @@ public class Course implements Serializable {
 
     public Course school(School school) {
         this.setSchool(school);
+        return this;
+    }
+
+    public Year getYear() {
+        return this.year;
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
+    }
+
+    public Course year(Year year) {
+        this.setYear(year);
         return this;
     }
 
@@ -154,6 +183,9 @@ public class Course implements Serializable {
             "id=" + getId() +
             ", courseName='" + getCourseName() + "'" +
             ", courseCost=" + getCourseCost() +
+            ", duration=" + getDuration() +
+            ", seats=" + getSeats() +
+            ", notes='" + getNotes() + "'" +
             "}";
     }
 }

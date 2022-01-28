@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ISchool } from 'app/shared/model/school.model';
 import { getEntities as getSchools } from 'app/entities/school/school.reducer';
+import { IYear } from 'app/shared/model/year.model';
+import { getEntities as getYears } from 'app/entities/year/year.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './course.reducer';
 import { ICourse } from 'app/shared/model/course.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -18,6 +20,7 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const schools = useAppSelector(state => state.school.entities);
+  const years = useAppSelector(state => state.year.entities);
   const courseEntity = useAppSelector(state => state.course.entity);
   const loading = useAppSelector(state => state.course.loading);
   const updating = useAppSelector(state => state.course.updating);
@@ -34,6 +37,7 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
     }
 
     dispatch(getSchools({}));
+    dispatch(getYears({}));
   }, []);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...courseEntity,
       ...values,
       school: schools.find(it => it.id.toString() === values.school.toString()),
+      year: years.find(it => it.id.toString() === values.year.toString()),
     };
 
     if (isNew) {
@@ -62,6 +67,7 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
       : {
           ...courseEntity,
           school: courseEntity?.school?.id,
+          year: courseEntity?.year?.id,
         };
 
   return (
@@ -112,6 +118,37 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 }}
               />
               <ValidatedField
+                label={translate('classesManagementApp.course.duration')}
+                id="course-duration"
+                name="duration"
+                data-cy="duration"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                  min: { value: 30, message: translate('entity.validation.min', { min: 30 }) },
+                  validate: v => isNumber(v) || translate('entity.validation.number'),
+                }}
+              />
+              <ValidatedField
+                label={translate('classesManagementApp.course.seats')}
+                id="course-seats"
+                name="seats"
+                data-cy="seats"
+                type="text"
+                validate={{
+                  required: { value: true, message: translate('entity.validation.required') },
+                  min: { value: 1, message: translate('entity.validation.min', { min: 1 }) },
+                  validate: v => isNumber(v) || translate('entity.validation.number'),
+                }}
+              />
+              <ValidatedField
+                label={translate('classesManagementApp.course.notes')}
+                id="course-notes"
+                name="notes"
+                data-cy="notes"
+                type="text"
+              />
+              <ValidatedField
                 id="course-school"
                 name="school"
                 data-cy="school"
@@ -121,6 +158,22 @@ export const CourseUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {schools
                   ? schools.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="course-year"
+                name="year"
+                data-cy="year"
+                label={translate('classesManagementApp.course.year')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {years
+                  ? years.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

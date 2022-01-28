@@ -29,11 +29,11 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class BatchResourceIT {
 
-    private static final Integer DEFAULT_DURATION = 30;
-    private static final Integer UPDATED_DURATION = 31;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_SEATS = 1;
-    private static final Integer UPDATED_SEATS = 2;
+    private static final String DEFAULT_NOTES = "AAAAAAAAAA";
+    private static final String UPDATED_NOTES = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/batches";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -59,7 +59,7 @@ class BatchResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Batch createEntity(EntityManager em) {
-        Batch batch = new Batch().duration(DEFAULT_DURATION).seats(DEFAULT_SEATS);
+        Batch batch = new Batch().name(DEFAULT_NAME).notes(DEFAULT_NOTES);
         return batch;
     }
 
@@ -70,7 +70,7 @@ class BatchResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Batch createUpdatedEntity(EntityManager em) {
-        Batch batch = new Batch().duration(UPDATED_DURATION).seats(UPDATED_SEATS);
+        Batch batch = new Batch().name(UPDATED_NAME).notes(UPDATED_NOTES);
         return batch;
     }
 
@@ -92,8 +92,8 @@ class BatchResourceIT {
         List<Batch> batchList = batchRepository.findAll();
         assertThat(batchList).hasSize(databaseSizeBeforeCreate + 1);
         Batch testBatch = batchList.get(batchList.size() - 1);
-        assertThat(testBatch.getDuration()).isEqualTo(DEFAULT_DURATION);
-        assertThat(testBatch.getSeats()).isEqualTo(DEFAULT_SEATS);
+        assertThat(testBatch.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testBatch.getNotes()).isEqualTo(DEFAULT_NOTES);
     }
 
     @Test
@@ -116,40 +116,6 @@ class BatchResourceIT {
 
     @Test
     @Transactional
-    void checkDurationIsRequired() throws Exception {
-        int databaseSizeBeforeTest = batchRepository.findAll().size();
-        // set the field null
-        batch.setDuration(null);
-
-        // Create the Batch, which fails.
-
-        restBatchMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(batch)))
-            .andExpect(status().isBadRequest());
-
-        List<Batch> batchList = batchRepository.findAll();
-        assertThat(batchList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    void checkSeatsIsRequired() throws Exception {
-        int databaseSizeBeforeTest = batchRepository.findAll().size();
-        // set the field null
-        batch.setSeats(null);
-
-        // Create the Batch, which fails.
-
-        restBatchMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(batch)))
-            .andExpect(status().isBadRequest());
-
-        List<Batch> batchList = batchRepository.findAll();
-        assertThat(batchList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllBatches() throws Exception {
         // Initialize the database
         batchRepository.saveAndFlush(batch);
@@ -160,8 +126,8 @@ class BatchResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(batch.getId().intValue())))
-            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
-            .andExpect(jsonPath("$.[*].seats").value(hasItem(DEFAULT_SEATS)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
 
     @Test
@@ -176,8 +142,8 @@ class BatchResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(batch.getId().intValue()))
-            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
-            .andExpect(jsonPath("$.seats").value(DEFAULT_SEATS));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
 
     @Test
@@ -199,7 +165,7 @@ class BatchResourceIT {
         Batch updatedBatch = batchRepository.findById(batch.getId()).get();
         // Disconnect from session so that the updates on updatedBatch are not directly saved in db
         em.detach(updatedBatch);
-        updatedBatch.duration(UPDATED_DURATION).seats(UPDATED_SEATS);
+        updatedBatch.name(UPDATED_NAME).notes(UPDATED_NOTES);
 
         restBatchMockMvc
             .perform(
@@ -213,8 +179,8 @@ class BatchResourceIT {
         List<Batch> batchList = batchRepository.findAll();
         assertThat(batchList).hasSize(databaseSizeBeforeUpdate);
         Batch testBatch = batchList.get(batchList.size() - 1);
-        assertThat(testBatch.getDuration()).isEqualTo(UPDATED_DURATION);
-        assertThat(testBatch.getSeats()).isEqualTo(UPDATED_SEATS);
+        assertThat(testBatch.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBatch.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test
@@ -285,7 +251,7 @@ class BatchResourceIT {
         Batch partialUpdatedBatch = new Batch();
         partialUpdatedBatch.setId(batch.getId());
 
-        partialUpdatedBatch.seats(UPDATED_SEATS);
+        partialUpdatedBatch.notes(UPDATED_NOTES);
 
         restBatchMockMvc
             .perform(
@@ -299,8 +265,8 @@ class BatchResourceIT {
         List<Batch> batchList = batchRepository.findAll();
         assertThat(batchList).hasSize(databaseSizeBeforeUpdate);
         Batch testBatch = batchList.get(batchList.size() - 1);
-        assertThat(testBatch.getDuration()).isEqualTo(DEFAULT_DURATION);
-        assertThat(testBatch.getSeats()).isEqualTo(UPDATED_SEATS);
+        assertThat(testBatch.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testBatch.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test
@@ -315,7 +281,7 @@ class BatchResourceIT {
         Batch partialUpdatedBatch = new Batch();
         partialUpdatedBatch.setId(batch.getId());
 
-        partialUpdatedBatch.duration(UPDATED_DURATION).seats(UPDATED_SEATS);
+        partialUpdatedBatch.name(UPDATED_NAME).notes(UPDATED_NOTES);
 
         restBatchMockMvc
             .perform(
@@ -329,8 +295,8 @@ class BatchResourceIT {
         List<Batch> batchList = batchRepository.findAll();
         assertThat(batchList).hasSize(databaseSizeBeforeUpdate);
         Batch testBatch = batchList.get(batchList.size() - 1);
-        assertThat(testBatch.getDuration()).isEqualTo(UPDATED_DURATION);
-        assertThat(testBatch.getSeats()).isEqualTo(UPDATED_SEATS);
+        assertThat(testBatch.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testBatch.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test

@@ -55,6 +55,14 @@ export const FinanceEntryDetail = (props: RouteComponentProps<{ id: string }>) =
             <Translate contentKey="classesManagementApp.financeEntry.student">Student</Translate>
           </dt>
           <dd>{financeEntryEntity.student ? financeEntryEntity.student.id : ''}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.financeEntry.bank">Bank</Translate>
+          </dt>
+          <dd>{financeEntryEntity.bank ? financeEntryEntity.bank.id : ''}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.financeEntry.year">Year</Translate>
+          </dt>
+          <dd>{financeEntryEntity.year ? financeEntryEntity.year.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/finance-entry" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

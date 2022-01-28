@@ -1,0 +1,24 @@
+{
+  "classesManagementApp": {
+    "year": {
+      "home": {
+        "title": "Years",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Year",
+        "createOrEditLabel": "Create or edit a Year",
+        "notFound": "No Years found"
+      },
+      "created": "A new Year is created with identifier {{ param }}",
+      "updated": "A Year is updated with identifier {{ param }}",
+      "deleted": "A Year is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Year {{ id }}?"
+      },
+      "detail": {
+        "title": "Year"
+      },
+      "id": "ID",
+      "year": "Year"
+    }
+  }
+}

@@ -56,7 +56,19 @@ export const Course = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="classesManagementApp.course.courseCost">Course Cost</Translate>
                 </th>
                 <th>
+                  <Translate contentKey="classesManagementApp.course.duration">Duration</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.course.seats">Seats</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.course.notes">Notes</Translate>
+                </th>
+                <th>
                   <Translate contentKey="classesManagementApp.course.school">School</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.course.year">Year</Translate>
                 </th>
                 <th />
               </tr>
@@ -71,7 +83,11 @@ export const Course = (props: RouteComponentProps<{ url: string }>) => {
                   </td>
                   <td>{course.courseName}</td>
                   <td>{course.courseCost}</td>
+                  <td>{course.duration}</td>
+                  <td>{course.seats}</td>
+                  <td>{course.notes}</td>
                   <td>{course.school ? <Link to={`school/${course.school.id}`}>{course.school.id}</Link> : ''}</td>
+                  <td>{course.year ? <Link to={`year/${course.year.id}`}>{course.year.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${course.id}`} color="info" size="sm" data-cy="entityDetailsButton">

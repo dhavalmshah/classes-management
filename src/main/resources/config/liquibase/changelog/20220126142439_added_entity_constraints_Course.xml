@@ -13,5 +13,11 @@
                                  constraintName="fk_course__school_id"
                                  referencedColumnNames="id"
                                  referencedTableName="school"/>
+
+        <addForeignKeyConstraint baseColumnNames="year_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course__year_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="year"/>
     </changeSet>
 </databaseChangeLog>

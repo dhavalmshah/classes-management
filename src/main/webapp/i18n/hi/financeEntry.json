@@ -21,7 +21,9 @@
       "transactionDate": "Transaction Date",
       "amount": "Amount",
       "notes": "Notes",
-      "student": "Student"
+      "student": "Student",
+      "bank": "Bank",
+      "year": "Year"
     }
   }
 }

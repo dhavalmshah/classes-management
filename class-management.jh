@@ -1,4 +1,14 @@
 
+entity Year {
+	year String required
+}
+
+entity Bank {
+	accountName String required,
+	accountNumber String required
+	notes String,
+}
+
 entity School {
 	schoolName String required
 }
@@ -12,7 +22,8 @@ entity Student {
     standard Standard,
     studentPhone String,
     parentName String,
-    parentPhone String
+    parentPhone String,
+    notes String
 }
 
 enum Standard {
@@ -22,11 +33,14 @@ enum Standard {
 entity Course {
 	courseName String required,
     courseCost BigDecimal required min(500),
+	duration Integer required min(30),
+    seats Integer required min(1),
+    notes String
 }
 
 entity Batch {
-	duration Integer required min(30),
-    seats Integer required min(1)
+	name String
+	notes String
 }
 
 entity FinanceEntry {
@@ -54,12 +68,20 @@ relationship ManyToOne {
     Batch{course} to Course,
     Batch{center} to Center,
     FinanceEntry{student} to Student,
+    FinanceEntry{bank} to Bank,
+}
+
+relationship ManyToOne {
+	FinanceEntry{year} to Year,
+    Course{year} to Year,
+    Student{year} to Year,
+    Batch{year} to Year
 }
 
 relationship OneToMany {
 	Batch to MockSchedule{batch},
     Student to Enrollment{student},
-    Course to Enrollment{course}
+    Batch to Enrollment{course}
 }
 
 relationship OneToOne {

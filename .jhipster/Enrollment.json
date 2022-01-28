@@ -31,7 +31,7 @@
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "course",
+      "otherEntityName": "batch",
       "otherEntityRelationshipName": "enrollment",
       "relationshipName": "course",
       "relationshipType": "many-to-one"

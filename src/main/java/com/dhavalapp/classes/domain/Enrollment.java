@@ -27,18 +27,18 @@ public class Enrollment implements Serializable {
     @Column(name = "notes", nullable = false)
     private String notes;
 
-    @JsonIgnoreProperties(value = { "student" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "student", "bank", "year" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
     private FinanceEntry fees;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "enrollments", "school" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enrollments", "school", "year" }, allowSetters = true)
     private Student student;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "enrollments", "school" }, allowSetters = true)
-    private Course course;
+    @JsonIgnoreProperties(value = { "mockSchedules", "enrollments", "course", "center", "year" }, allowSetters = true)
+    private Batch course;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -94,16 +94,16 @@ public class Enrollment implements Serializable {
         return this;
     }
 
-    public Course getCourse() {
+    public Batch getCourse() {
         return this.course;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourse(Batch batch) {
+        this.course = batch;
     }
 
-    public Enrollment course(Course course) {
-        this.setCourse(course);
+    public Enrollment course(Batch batch) {
+        this.setCourse(batch);
         return this;
     }
 

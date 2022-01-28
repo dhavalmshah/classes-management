@@ -9,8 +9,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,7 +48,7 @@ public class BatchResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/batches")
-    public ResponseEntity<Batch> createBatch(@Valid @RequestBody Batch batch) throws URISyntaxException {
+    public ResponseEntity<Batch> createBatch(@RequestBody Batch batch) throws URISyntaxException {
         log.debug("REST request to save Batch : {}", batch);
         if (batch.getId() != null) {
             throw new BadRequestAlertException("A new batch cannot already have an ID", ENTITY_NAME, "idexists");
@@ -73,7 +71,7 @@ public class BatchResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/batches/{id}")
-    public ResponseEntity<Batch> updateBatch(@PathVariable(value = "id", required = false) final Long id, @Valid @RequestBody Batch batch)
+    public ResponseEntity<Batch> updateBatch(@PathVariable(value = "id", required = false) final Long id, @RequestBody Batch batch)
         throws URISyntaxException {
         log.debug("REST request to update Batch : {}, {}", id, batch);
         if (batch.getId() == null) {
@@ -106,10 +104,8 @@ public class BatchResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/batches/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Batch> partialUpdateBatch(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Batch batch
-    ) throws URISyntaxException {
+    public ResponseEntity<Batch> partialUpdateBatch(@PathVariable(value = "id", required = false) final Long id, @RequestBody Batch batch)
+        throws URISyntaxException {
         log.debug("REST request to partial update Batch partially : {}, {}", id, batch);
         if (batch.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

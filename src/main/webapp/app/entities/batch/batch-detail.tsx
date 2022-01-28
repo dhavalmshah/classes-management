@@ -30,17 +30,17 @@ export const BatchDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{batchEntity.id}</dd>
           <dt>
-            <span id="duration">
-              <Translate contentKey="classesManagementApp.batch.duration">Duration</Translate>
+            <span id="name">
+              <Translate contentKey="classesManagementApp.batch.name">Name</Translate>
             </span>
           </dt>
-          <dd>{batchEntity.duration}</dd>
+          <dd>{batchEntity.name}</dd>
           <dt>
-            <span id="seats">
-              <Translate contentKey="classesManagementApp.batch.seats">Seats</Translate>
+            <span id="notes">
+              <Translate contentKey="classesManagementApp.batch.notes">Notes</Translate>
             </span>
           </dt>
-          <dd>{batchEntity.seats}</dd>
+          <dd>{batchEntity.notes}</dd>
           <dt>
             <Translate contentKey="classesManagementApp.batch.course">Course</Translate>
           </dt>
@@ -49,6 +49,10 @@ export const BatchDetail = (props: RouteComponentProps<{ id: string }>) => {
             <Translate contentKey="classesManagementApp.batch.center">Center</Translate>
           </dt>
           <dd>{batchEntity.center ? batchEntity.center.id : ''}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.batch.year">Year</Translate>
+          </dt>
+          <dd>{batchEntity.year ? batchEntity.year.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/batch" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

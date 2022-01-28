@@ -50,16 +50,19 @@ export const Batch = (props: RouteComponentProps<{ url: string }>) => {
                   <Translate contentKey="classesManagementApp.batch.id">ID</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="classesManagementApp.batch.duration">Duration</Translate>
+                  <Translate contentKey="classesManagementApp.batch.name">Name</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="classesManagementApp.batch.seats">Seats</Translate>
+                  <Translate contentKey="classesManagementApp.batch.notes">Notes</Translate>
                 </th>
                 <th>
                   <Translate contentKey="classesManagementApp.batch.course">Course</Translate>
                 </th>
                 <th>
                   <Translate contentKey="classesManagementApp.batch.center">Center</Translate>
+                </th>
+                <th>
+                  <Translate contentKey="classesManagementApp.batch.year">Year</Translate>
                 </th>
                 <th />
               </tr>
@@ -72,10 +75,11 @@ export const Batch = (props: RouteComponentProps<{ url: string }>) => {
                       {batch.id}
                     </Button>
                   </td>
-                  <td>{batch.duration}</td>
-                  <td>{batch.seats}</td>
+                  <td>{batch.name}</td>
+                  <td>{batch.notes}</td>
                   <td>{batch.course ? <Link to={`course/${batch.course.id}`}>{batch.course.id}</Link> : ''}</td>
                   <td>{batch.center ? <Link to={`center/${batch.center.id}`}>{batch.center.id}</Link> : ''}</td>
+                  <td>{batch.year ? <Link to={`year/${batch.year.id}`}>{batch.year.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${batch.id}`} color="info" size="sm" data-cy="entityDetailsButton">

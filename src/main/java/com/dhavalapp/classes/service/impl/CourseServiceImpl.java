@@ -44,6 +44,15 @@ public class CourseServiceImpl implements CourseService {
                 if (course.getCourseCost() != null) {
                     existingCourse.setCourseCost(course.getCourseCost());
                 }
+                if (course.getDuration() != null) {
+                    existingCourse.setDuration(course.getDuration());
+                }
+                if (course.getSeats() != null) {
+                    existingCourse.setSeats(course.getSeats());
+                }
+                if (course.getNotes() != null) {
+                    existingCourse.setNotes(course.getNotes());
+                }
 
                 return existingCourse;
             })

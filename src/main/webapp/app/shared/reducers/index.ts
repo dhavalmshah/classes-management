@@ -27,6 +27,10 @@ import financeEntry from 'app/entities/finance-entry/finance-entry.reducer';
 import mockSchedule from 'app/entities/mock-schedule/mock-schedule.reducer';
 // prettier-ignore
 import enrollment from 'app/entities/enrollment/enrollment.reducer';
+// prettier-ignore
+import year from 'app/entities/year/year.reducer';
+// prettier-ignore
+import bank from 'app/entities/bank/bank.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 const rootReducer = {
@@ -48,6 +52,8 @@ const rootReducer = {
   financeEntry,
   mockSchedule,
   enrollment,
+  year,
+  bank,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 };

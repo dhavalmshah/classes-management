@@ -8,6 +8,8 @@ import { ICourse } from 'app/shared/model/course.model';
 import { getEntities as getCourses } from 'app/entities/course/course.reducer';
 import { ICenter } from 'app/shared/model/center.model';
 import { getEntities as getCenters } from 'app/entities/center/center.reducer';
+import { IYear } from 'app/shared/model/year.model';
+import { getEntities as getYears } from 'app/entities/year/year.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './batch.reducer';
 import { IBatch } from 'app/shared/model/batch.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -21,6 +23,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
   const courses = useAppSelector(state => state.course.entities);
   const centers = useAppSelector(state => state.center.entities);
+  const years = useAppSelector(state => state.year.entities);
   const batchEntity = useAppSelector(state => state.batch.entity);
   const loading = useAppSelector(state => state.batch.loading);
   const updating = useAppSelector(state => state.batch.updating);
@@ -38,6 +41,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
 
     dispatch(getCourses({}));
     dispatch(getCenters({}));
+    dispatch(getYears({}));
   }, []);
 
   useEffect(() => {
@@ -52,6 +56,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
       ...values,
       course: courses.find(it => it.id.toString() === values.course.toString()),
       center: centers.find(it => it.id.toString() === values.center.toString()),
+      year: years.find(it => it.id.toString() === values.year.toString()),
     };
 
     if (isNew) {
@@ -68,6 +73,7 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
           ...batchEntity,
           course: batchEntity?.course?.id,
           center: batchEntity?.center?.id,
+          year: batchEntity?.year?.id,
         };
 
   return (
@@ -95,29 +101,13 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                   validate={{ required: true }}
                 />
               ) : null}
+              <ValidatedField label={translate('classesManagementApp.batch.name')} id="batch-name" name="name" data-cy="name" type="text" />
               <ValidatedField
-                label={translate('classesManagementApp.batch.duration')}
-                id="batch-duration"
-                name="duration"
-                data-cy="duration"
+                label={translate('classesManagementApp.batch.notes')}
+                id="batch-notes"
+                name="notes"
+                data-cy="notes"
                 type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  min: { value: 30, message: translate('entity.validation.min', { min: 30 }) },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
-              />
-              <ValidatedField
-                label={translate('classesManagementApp.batch.seats')}
-                id="batch-seats"
-                name="seats"
-                data-cy="seats"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                  min: { value: 1, message: translate('entity.validation.min', { min: 1 }) },
-                  validate: v => isNumber(v) || translate('entity.validation.number'),
-                }}
               />
               <ValidatedField
                 id="batch-course"
@@ -145,6 +135,16 @@ export const BatchUpdate = (props: RouteComponentProps<{ id: string }>) => {
                 <option value="" key="0" />
                 {centers
                   ? centers.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField id="batch-year" name="year" data-cy="year" label={translate('classesManagementApp.batch.year')} type="select">
+                <option value="" key="0" />
+                {years
+                  ? years.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>

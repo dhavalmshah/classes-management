@@ -23,8 +23,10 @@
       "studentPhone": "Student Phone",
       "parentName": "Parent Name",
       "parentPhone": "Parent Phone",
+      "notes": "Notes",
       "enrollment": "Enrollment",
-      "school": "School"
+      "school": "School",
+      "year": "Year"
     }
   }
 }

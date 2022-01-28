@@ -75,7 +75,7 @@ export const Enrollment = (props: RouteComponentProps<{ url: string }>) => {
                   <td>{enrollment.notes}</td>
                   <td>{enrollment.fees ? <Link to={`finance-entry/${enrollment.fees.id}`}>{enrollment.fees.id}</Link> : ''}</td>
                   <td>{enrollment.student ? <Link to={`student/${enrollment.student.id}`}>{enrollment.student.id}</Link> : ''}</td>
-                  <td>{enrollment.course ? <Link to={`course/${enrollment.course.id}`}>{enrollment.course.id}</Link> : ''}</td>
+                  <td>{enrollment.course ? <Link to={`batch/${enrollment.course.id}`}>{enrollment.course.id}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${enrollment.id}`} color="info" size="sm" data-cy="entityDetailsButton">

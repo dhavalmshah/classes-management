@@ -43,6 +43,9 @@ public class Student implements Serializable {
     @Column(name = "parent_phone")
     private String parentPhone;
 
+    @Column(name = "notes")
+    private String notes;
+
     @OneToMany(mappedBy = "student")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "fees", "student", "course" }, allowSetters = true)
@@ -50,6 +53,9 @@ public class Student implements Serializable {
 
     @ManyToOne
     private School school;
+
+    @ManyToOne
+    private Year year;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -131,6 +137,19 @@ public class Student implements Serializable {
         this.parentPhone = parentPhone;
     }
 
+    public String getNotes() {
+        return this.notes;
+    }
+
+    public Student notes(String notes) {
+        this.setNotes(notes);
+        return this;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public Set<Enrollment> getEnrollments() {
         return this.enrollments;
     }
@@ -175,6 +194,19 @@ public class Student implements Serializable {
         return this;
     }
 
+    public Year getYear() {
+        return this.year;
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
+    }
+
+    public Student year(Year year) {
+        this.setYear(year);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -204,6 +236,7 @@ public class Student implements Serializable {
             ", studentPhone='" + getStudentPhone() + "'" +
             ", parentName='" + getParentName() + "'" +
             ", parentPhone='" + getParentPhone() + "'" +
+            ", notes='" + getNotes() + "'" +
             "}";
     }
 }

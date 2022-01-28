@@ -24,6 +24,6 @@
                                  baseTableName="enrollment"
                                  constraintName="fk_enrollment__course_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="course"/>
+                                 referencedTableName="batch"/>
     </changeSet>
 </databaseChangeLog>

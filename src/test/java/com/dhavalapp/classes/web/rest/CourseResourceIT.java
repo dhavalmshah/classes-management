@@ -37,6 +37,15 @@ class CourseResourceIT {
     private static final BigDecimal DEFAULT_COURSE_COST = new BigDecimal(500);
     private static final BigDecimal UPDATED_COURSE_COST = new BigDecimal(501);
 
+    private static final Integer DEFAULT_DURATION = 30;
+    private static final Integer UPDATED_DURATION = 31;
+
+    private static final Integer DEFAULT_SEATS = 1;
+    private static final Integer UPDATED_SEATS = 2;
+
+    private static final String DEFAULT_NOTES = "AAAAAAAAAA";
+    private static final String UPDATED_NOTES = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/courses";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -61,7 +70,12 @@ class CourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Course createEntity(EntityManager em) {
-        Course course = new Course().courseName(DEFAULT_COURSE_NAME).courseCost(DEFAULT_COURSE_COST);
+        Course course = new Course()
+            .courseName(DEFAULT_COURSE_NAME)
+            .courseCost(DEFAULT_COURSE_COST)
+            .duration(DEFAULT_DURATION)
+            .seats(DEFAULT_SEATS)
+            .notes(DEFAULT_NOTES);
         return course;
     }
 
@@ -72,7 +86,12 @@ class CourseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Course createUpdatedEntity(EntityManager em) {
-        Course course = new Course().courseName(UPDATED_COURSE_NAME).courseCost(UPDATED_COURSE_COST);
+        Course course = new Course()
+            .courseName(UPDATED_COURSE_NAME)
+            .courseCost(UPDATED_COURSE_COST)
+            .duration(UPDATED_DURATION)
+            .seats(UPDATED_SEATS)
+            .notes(UPDATED_NOTES);
         return course;
     }
 
@@ -96,6 +115,9 @@ class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getCourseName()).isEqualTo(DEFAULT_COURSE_NAME);
         assertThat(testCourse.getCourseCost()).isEqualByComparingTo(DEFAULT_COURSE_COST);
+        assertThat(testCourse.getDuration()).isEqualTo(DEFAULT_DURATION);
+        assertThat(testCourse.getSeats()).isEqualTo(DEFAULT_SEATS);
+        assertThat(testCourse.getNotes()).isEqualTo(DEFAULT_NOTES);
     }
 
     @Test
@@ -152,6 +174,40 @@ class CourseResourceIT {
 
     @Test
     @Transactional
+    void checkDurationIsRequired() throws Exception {
+        int databaseSizeBeforeTest = courseRepository.findAll().size();
+        // set the field null
+        course.setDuration(null);
+
+        // Create the Course, which fails.
+
+        restCourseMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(course)))
+            .andExpect(status().isBadRequest());
+
+        List<Course> courseList = courseRepository.findAll();
+        assertThat(courseList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    void checkSeatsIsRequired() throws Exception {
+        int databaseSizeBeforeTest = courseRepository.findAll().size();
+        // set the field null
+        course.setSeats(null);
+
+        // Create the Course, which fails.
+
+        restCourseMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(course)))
+            .andExpect(status().isBadRequest());
+
+        List<Course> courseList = courseRepository.findAll();
+        assertThat(courseList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllCourses() throws Exception {
         // Initialize the database
         courseRepository.saveAndFlush(course);
@@ -163,7 +219,10 @@ class CourseResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(course.getId().intValue())))
             .andExpect(jsonPath("$.[*].courseName").value(hasItem(DEFAULT_COURSE_NAME)))
-            .andExpect(jsonPath("$.[*].courseCost").value(hasItem(sameNumber(DEFAULT_COURSE_COST))));
+            .andExpect(jsonPath("$.[*].courseCost").value(hasItem(sameNumber(DEFAULT_COURSE_COST))))
+            .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
+            .andExpect(jsonPath("$.[*].seats").value(hasItem(DEFAULT_SEATS)))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
 
     @Test
@@ -179,7 +238,10 @@ class CourseResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(course.getId().intValue()))
             .andExpect(jsonPath("$.courseName").value(DEFAULT_COURSE_NAME))
-            .andExpect(jsonPath("$.courseCost").value(sameNumber(DEFAULT_COURSE_COST)));
+            .andExpect(jsonPath("$.courseCost").value(sameNumber(DEFAULT_COURSE_COST)))
+            .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
+            .andExpect(jsonPath("$.seats").value(DEFAULT_SEATS))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
 
     @Test
@@ -201,7 +263,12 @@ class CourseResourceIT {
         Course updatedCourse = courseRepository.findById(course.getId()).get();
         // Disconnect from session so that the updates on updatedCourse are not directly saved in db
         em.detach(updatedCourse);
-        updatedCourse.courseName(UPDATED_COURSE_NAME).courseCost(UPDATED_COURSE_COST);
+        updatedCourse
+            .courseName(UPDATED_COURSE_NAME)
+            .courseCost(UPDATED_COURSE_COST)
+            .duration(UPDATED_DURATION)
+            .seats(UPDATED_SEATS)
+            .notes(UPDATED_NOTES);
 
         restCourseMockMvc
             .perform(
@@ -217,6 +284,9 @@ class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getCourseName()).isEqualTo(UPDATED_COURSE_NAME);
         assertThat(testCourse.getCourseCost()).isEqualByComparingTo(UPDATED_COURSE_COST);
+        assertThat(testCourse.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testCourse.getSeats()).isEqualTo(UPDATED_SEATS);
+        assertThat(testCourse.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test
@@ -287,6 +357,8 @@ class CourseResourceIT {
         Course partialUpdatedCourse = new Course();
         partialUpdatedCourse.setId(course.getId());
 
+        partialUpdatedCourse.duration(UPDATED_DURATION).notes(UPDATED_NOTES);
+
         restCourseMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedCourse.getId())
@@ -301,6 +373,9 @@ class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getCourseName()).isEqualTo(DEFAULT_COURSE_NAME);
         assertThat(testCourse.getCourseCost()).isEqualByComparingTo(DEFAULT_COURSE_COST);
+        assertThat(testCourse.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testCourse.getSeats()).isEqualTo(DEFAULT_SEATS);
+        assertThat(testCourse.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test
@@ -315,7 +390,12 @@ class CourseResourceIT {
         Course partialUpdatedCourse = new Course();
         partialUpdatedCourse.setId(course.getId());
 
-        partialUpdatedCourse.courseName(UPDATED_COURSE_NAME).courseCost(UPDATED_COURSE_COST);
+        partialUpdatedCourse
+            .courseName(UPDATED_COURSE_NAME)
+            .courseCost(UPDATED_COURSE_COST)
+            .duration(UPDATED_DURATION)
+            .seats(UPDATED_SEATS)
+            .notes(UPDATED_NOTES);
 
         restCourseMockMvc
             .perform(
@@ -331,6 +411,9 @@ class CourseResourceIT {
         Course testCourse = courseList.get(courseList.size() - 1);
         assertThat(testCourse.getCourseName()).isEqualTo(UPDATED_COURSE_NAME);
         assertThat(testCourse.getCourseCost()).isEqualByComparingTo(UPDATED_COURSE_COST);
+        assertThat(testCourse.getDuration()).isEqualTo(UPDATED_DURATION);
+        assertThat(testCourse.getSeats()).isEqualTo(UPDATED_SEATS);
+        assertThat(testCourse.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test

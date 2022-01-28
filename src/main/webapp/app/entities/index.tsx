@@ -12,6 +12,8 @@ import Batch from './batch';
 import FinanceEntry from './finance-entry';
 import MockSchedule from './mock-schedule';
 import Enrollment from './enrollment';
+import Year from './year';
+import Bank from './bank';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -26,6 +28,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}finance-entry`} component={FinanceEntry} />
       <ErrorBoundaryRoute path={`${match.url}mock-schedule`} component={MockSchedule} />
       <ErrorBoundaryRoute path={`${match.url}enrollment`} component={Enrollment} />
+      <ErrorBoundaryRoute path={`${match.url}year`} component={Year} />
+      <ErrorBoundaryRoute path={`${match.url}bank`} component={Bank} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -31,6 +31,18 @@
       "otherEntityRelationshipName": "financeEntry",
       "relationshipName": "student",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "bank",
+      "otherEntityRelationshipName": "financeEntry",
+      "relationshipName": "bank",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "financeEntry",
+      "relationshipName": "year",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"

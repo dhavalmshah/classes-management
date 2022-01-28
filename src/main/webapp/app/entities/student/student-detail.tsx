@@ -60,9 +60,19 @@ export const StudentDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{studentEntity.parentPhone}</dd>
           <dt>
+            <span id="notes">
+              <Translate contentKey="classesManagementApp.student.notes">Notes</Translate>
+            </span>
+          </dt>
+          <dd>{studentEntity.notes}</dd>
+          <dt>
             <Translate contentKey="classesManagementApp.student.school">School</Translate>
           </dt>
           <dd>{studentEntity.school ? studentEntity.school.id : ''}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.student.year">Year</Translate>
+          </dt>
+          <dd>{studentEntity.year ? studentEntity.year.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/student" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

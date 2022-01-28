@@ -23,6 +23,8 @@
     <include file="config/liquibase/changelog/20220126142441_added_entity_FinanceEntry.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220126142442_added_entity_MockSchedule.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220126142443_added_entity_Enrollment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220128195520_added_entity_Year.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220128195521_added_entity_Bank.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20220126142439_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220126142440_added_entity_constraints_Batch.xml" relativeToChangelogFile="false"/>

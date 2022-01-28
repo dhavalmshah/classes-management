@@ -37,8 +37,14 @@ public class FinanceEntry implements Serializable {
     private String notes;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "enrollments", "school" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "enrollments", "school", "year" }, allowSetters = true)
     private Student student;
+
+    @ManyToOne
+    private Bank bank;
+
+    @ManyToOne
+    private Year year;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -104,6 +110,32 @@ public class FinanceEntry implements Serializable {
 
     public FinanceEntry student(Student student) {
         this.setStudent(student);
+        return this;
+    }
+
+    public Bank getBank() {
+        return this.bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
+    public FinanceEntry bank(Bank bank) {
+        this.setBank(bank);
+        return this;
+    }
+
+    public Year getYear() {
+        return this.year;
+    }
+
+    public void setYear(Year year) {
+        this.year = year;
+    }
+
+    public FinanceEntry year(Year year) {
+        this.setYear(year);
         return this;
     }
 

@@ -45,6 +45,9 @@ class StudentResourceIT {
     private static final String DEFAULT_PARENT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PARENT_PHONE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_NOTES = "AAAAAAAAAA";
+    private static final String UPDATED_NOTES = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/students";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -74,7 +77,8 @@ class StudentResourceIT {
             .standard(DEFAULT_STANDARD)
             .studentPhone(DEFAULT_STUDENT_PHONE)
             .parentName(DEFAULT_PARENT_NAME)
-            .parentPhone(DEFAULT_PARENT_PHONE);
+            .parentPhone(DEFAULT_PARENT_PHONE)
+            .notes(DEFAULT_NOTES);
         return student;
     }
 
@@ -90,7 +94,8 @@ class StudentResourceIT {
             .standard(UPDATED_STANDARD)
             .studentPhone(UPDATED_STUDENT_PHONE)
             .parentName(UPDATED_PARENT_NAME)
-            .parentPhone(UPDATED_PARENT_PHONE);
+            .parentPhone(UPDATED_PARENT_PHONE)
+            .notes(UPDATED_NOTES);
         return student;
     }
 
@@ -117,6 +122,7 @@ class StudentResourceIT {
         assertThat(testStudent.getStudentPhone()).isEqualTo(DEFAULT_STUDENT_PHONE);
         assertThat(testStudent.getParentName()).isEqualTo(DEFAULT_PARENT_NAME);
         assertThat(testStudent.getParentPhone()).isEqualTo(DEFAULT_PARENT_PHONE);
+        assertThat(testStudent.getNotes()).isEqualTo(DEFAULT_NOTES);
     }
 
     @Test
@@ -170,7 +176,8 @@ class StudentResourceIT {
             .andExpect(jsonPath("$.[*].standard").value(hasItem(DEFAULT_STANDARD.toString())))
             .andExpect(jsonPath("$.[*].studentPhone").value(hasItem(DEFAULT_STUDENT_PHONE)))
             .andExpect(jsonPath("$.[*].parentName").value(hasItem(DEFAULT_PARENT_NAME)))
-            .andExpect(jsonPath("$.[*].parentPhone").value(hasItem(DEFAULT_PARENT_PHONE)));
+            .andExpect(jsonPath("$.[*].parentPhone").value(hasItem(DEFAULT_PARENT_PHONE)))
+            .andExpect(jsonPath("$.[*].notes").value(hasItem(DEFAULT_NOTES)));
     }
 
     @Test
@@ -189,7 +196,8 @@ class StudentResourceIT {
             .andExpect(jsonPath("$.standard").value(DEFAULT_STANDARD.toString()))
             .andExpect(jsonPath("$.studentPhone").value(DEFAULT_STUDENT_PHONE))
             .andExpect(jsonPath("$.parentName").value(DEFAULT_PARENT_NAME))
-            .andExpect(jsonPath("$.parentPhone").value(DEFAULT_PARENT_PHONE));
+            .andExpect(jsonPath("$.parentPhone").value(DEFAULT_PARENT_PHONE))
+            .andExpect(jsonPath("$.notes").value(DEFAULT_NOTES));
     }
 
     @Test
@@ -216,7 +224,8 @@ class StudentResourceIT {
             .standard(UPDATED_STANDARD)
             .studentPhone(UPDATED_STUDENT_PHONE)
             .parentName(UPDATED_PARENT_NAME)
-            .parentPhone(UPDATED_PARENT_PHONE);
+            .parentPhone(UPDATED_PARENT_PHONE)
+            .notes(UPDATED_NOTES);
 
         restStudentMockMvc
             .perform(
@@ -235,6 +244,7 @@ class StudentResourceIT {
         assertThat(testStudent.getStudentPhone()).isEqualTo(UPDATED_STUDENT_PHONE);
         assertThat(testStudent.getParentName()).isEqualTo(UPDATED_PARENT_NAME);
         assertThat(testStudent.getParentPhone()).isEqualTo(UPDATED_PARENT_PHONE);
+        assertThat(testStudent.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test
@@ -324,6 +334,7 @@ class StudentResourceIT {
         assertThat(testStudent.getStudentPhone()).isEqualTo(UPDATED_STUDENT_PHONE);
         assertThat(testStudent.getParentName()).isEqualTo(UPDATED_PARENT_NAME);
         assertThat(testStudent.getParentPhone()).isEqualTo(UPDATED_PARENT_PHONE);
+        assertThat(testStudent.getNotes()).isEqualTo(DEFAULT_NOTES);
     }
 
     @Test
@@ -343,7 +354,8 @@ class StudentResourceIT {
             .standard(UPDATED_STANDARD)
             .studentPhone(UPDATED_STUDENT_PHONE)
             .parentName(UPDATED_PARENT_NAME)
-            .parentPhone(UPDATED_PARENT_PHONE);
+            .parentPhone(UPDATED_PARENT_PHONE)
+            .notes(UPDATED_NOTES);
 
         restStudentMockMvc
             .perform(
@@ -362,6 +374,7 @@ class StudentResourceIT {
         assertThat(testStudent.getStudentPhone()).isEqualTo(UPDATED_STUDENT_PHONE);
         assertThat(testStudent.getParentName()).isEqualTo(UPDATED_PARENT_NAME);
         assertThat(testStudent.getParentPhone()).isEqualTo(UPDATED_PARENT_PHONE);
+        assertThat(testStudent.getNotes()).isEqualTo(UPDATED_NOTES);
     }
 
     @Test

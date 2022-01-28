@@ -42,9 +42,31 @@ export const CourseDetail = (props: RouteComponentProps<{ id: string }>) => {
           </dt>
           <dd>{courseEntity.courseCost}</dd>
           <dt>
+            <span id="duration">
+              <Translate contentKey="classesManagementApp.course.duration">Duration</Translate>
+            </span>
+          </dt>
+          <dd>{courseEntity.duration}</dd>
+          <dt>
+            <span id="seats">
+              <Translate contentKey="classesManagementApp.course.seats">Seats</Translate>
+            </span>
+          </dt>
+          <dd>{courseEntity.seats}</dd>
+          <dt>
+            <span id="notes">
+              <Translate contentKey="classesManagementApp.course.notes">Notes</Translate>
+            </span>
+          </dt>
+          <dd>{courseEntity.notes}</dd>
+          <dt>
             <Translate contentKey="classesManagementApp.course.school">School</Translate>
           </dt>
           <dd>{courseEntity.school ? courseEntity.school.id : ''}</dd>
+          <dt>
+            <Translate contentKey="classesManagementApp.course.year">Year</Translate>
+          </dt>
+          <dd>{courseEntity.year ? courseEntity.year.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/course" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -6,16 +6,12 @@
   "entityTableName": "batch",
   "fields": [
     {
-      "fieldName": "duration",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required", "min"],
-      "fieldValidateRulesMin": "30"
+      "fieldName": "name",
+      "fieldType": "String"
     },
     {
-      "fieldName": "seats",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required", "min"],
-      "fieldValidateRulesMin": "1"
+      "fieldName": "notes",
+      "fieldType": "String"
     }
   ],
   "fluentMethods": true,
@@ -31,6 +27,12 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityName": "enrollment",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "enrollment",
+      "relationshipType": "one-to-many"
+    },
+    {
       "otherEntityName": "course",
       "otherEntityRelationshipName": "batch",
       "relationshipName": "course",
@@ -40,6 +42,12 @@
       "otherEntityName": "center",
       "otherEntityRelationshipName": "batch",
       "relationshipName": "center",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "batch",
+      "relationshipName": "year",
       "relationshipType": "many-to-one"
     }
   ],

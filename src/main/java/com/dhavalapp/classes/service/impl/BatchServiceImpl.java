@@ -38,11 +38,11 @@ public class BatchServiceImpl implements BatchService {
         return batchRepository
             .findById(batch.getId())
             .map(existingBatch -> {
-                if (batch.getDuration() != null) {
-                    existingBatch.setDuration(batch.getDuration());
+                if (batch.getName() != null) {
+                    existingBatch.setName(batch.getName());
                 }
-                if (batch.getSeats() != null) {
-                    existingBatch.setSeats(batch.getSeats());
+                if (batch.getNotes() != null) {
+                    existingBatch.setNotes(batch.getNotes());
                 }
 
                 return existingBatch;

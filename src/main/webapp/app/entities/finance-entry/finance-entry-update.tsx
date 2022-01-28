@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IStudent } from 'app/shared/model/student.model';
 import { getEntities as getStudents } from 'app/entities/student/student.reducer';
+import { IBank } from 'app/shared/model/bank.model';
+import { getEntities as getBanks } from 'app/entities/bank/bank.reducer';
+import { IYear } from 'app/shared/model/year.model';
+import { getEntities as getYears } from 'app/entities/year/year.reducer';
 import { getEntity, updateEntity, createEntity, reset } from './finance-entry.reducer';
 import { IFinanceEntry } from 'app/shared/model/finance-entry.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -18,6 +22,8 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
   const [isNew] = useState(!props.match.params || !props.match.params.id);
 
   const students = useAppSelector(state => state.student.entities);
+  const banks = useAppSelector(state => state.bank.entities);
+  const years = useAppSelector(state => state.year.entities);
   const financeEntryEntity = useAppSelector(state => state.financeEntry.entity);
   const loading = useAppSelector(state => state.financeEntry.loading);
   const updating = useAppSelector(state => state.financeEntry.updating);
@@ -34,6 +40,8 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
     }
 
     dispatch(getStudents({}));
+    dispatch(getBanks({}));
+    dispatch(getYears({}));
   }, []);
 
   useEffect(() => {
@@ -47,6 +55,8 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
       ...financeEntryEntity,
       ...values,
       student: students.find(it => it.id.toString() === values.student.toString()),
+      bank: banks.find(it => it.id.toString() === values.bank.toString()),
+      year: years.find(it => it.id.toString() === values.year.toString()),
     };
 
     if (isNew) {
@@ -62,6 +72,8 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
       : {
           ...financeEntryEntity,
           student: financeEntryEntity?.student?.id,
+          bank: financeEntryEntity?.bank?.id,
+          year: financeEntryEntity?.year?.id,
         };
 
   return (
@@ -127,6 +139,38 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
                 <option value="" key="0" />
                 {students
                   ? students.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="finance-entry-bank"
+                name="bank"
+                data-cy="bank"
+                label={translate('classesManagementApp.financeEntry.bank')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {banks
+                  ? banks.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
+              <ValidatedField
+                id="finance-entry-year"
+                name="year"
+                data-cy="year"
+                label={translate('classesManagementApp.financeEntry.year')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {years
+                  ? years.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
                         {otherEntity.id}
                       </option>
