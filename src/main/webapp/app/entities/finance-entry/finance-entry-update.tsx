@@ -128,7 +128,7 @@ export const FinanceEntryUpdate = (props: RouteComponentProps<{ id: string }>) =
                 {students
                   ? students.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.studentName}
                       </option>
                     ))
                   : null}

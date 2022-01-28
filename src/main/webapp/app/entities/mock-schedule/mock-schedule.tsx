@@ -73,7 +73,9 @@ export const MockSchedule = (props: RouteComponentProps<{ url: string }>) => {
                     <Translate contentKey={`classesManagementApp.DayOfWeek.${mockSchedule.day}`} />
                   </td>
                   <td>{mockSchedule.timing ? <TextFormat type="date" value={mockSchedule.timing} format={APP_DATE_FORMAT} /> : null}</td>
-                  <td>{mockSchedule.batch ? <Link to={`batch/${mockSchedule.batch.id}`}>{mockSchedule.batch.id}</Link> : ''}</td>
+                  <td>
+                    {mockSchedule.batch ? <Link to={`batch/${mockSchedule.batch.id}`}>{mockSchedule.batch.course.courseName}</Link> : ''}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${mockSchedule.id}`} color="info" size="sm" data-cy="entityDetailsButton">

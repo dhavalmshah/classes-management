@@ -44,11 +44,11 @@ export const BatchDetail = (props: RouteComponentProps<{ id: string }>) => {
           <dt>
             <Translate contentKey="classesManagementApp.batch.course">Course</Translate>
           </dt>
-          <dd>{batchEntity.course ? batchEntity.course.id : ''}</dd>
+          <dd>{batchEntity.course ? batchEntity.course.courseName : ''}</dd>
           <dt>
             <Translate contentKey="classesManagementApp.batch.center">Center</Translate>
           </dt>
-          <dd>{batchEntity.center ? batchEntity.center.id : ''}</dd>
+          <dd>{batchEntity.center ? batchEntity.center.centerName : ''}</dd>
         </dl>
         <Button tag={Link} to="/batch" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

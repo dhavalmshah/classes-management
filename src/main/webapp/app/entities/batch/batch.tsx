@@ -74,8 +74,8 @@ export const Batch = (props: RouteComponentProps<{ url: string }>) => {
                   </td>
                   <td>{batch.duration}</td>
                   <td>{batch.seats}</td>
-                  <td>{batch.course ? <Link to={`course/${batch.course.id}`}>{batch.course.id}</Link> : ''}</td>
-                  <td>{batch.center ? <Link to={`center/${batch.center.id}`}>{batch.center.id}</Link> : ''}</td>
+                  <td>{batch.course ? <Link to={`course/${batch.course.id}`}>{batch.course.courseName}</Link> : ''}</td>
+                  <td>{batch.center ? <Link to={`center/${batch.center.id}`}>{batch.center.centerName}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${batch.id}`} color="info" size="sm" data-cy="entityDetailsButton">

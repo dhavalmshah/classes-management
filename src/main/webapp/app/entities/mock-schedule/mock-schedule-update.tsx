@@ -132,7 +132,7 @@ export const MockScheduleUpdate = (props: RouteComponentProps<{ id: string }>) =
                 {batches
                   ? batches.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.course.courseName}
                       </option>
                     ))
                   : null}

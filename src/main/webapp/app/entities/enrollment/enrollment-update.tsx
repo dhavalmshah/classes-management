@@ -138,7 +138,7 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
                 {students
                   ? students.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.studentName}
                       </option>
                     ))
                   : null}
@@ -154,7 +154,7 @@ export const EnrollmentUpdate = (props: RouteComponentProps<{ id: string }>) => 
                 {courses
                   ? courses.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.courseName}
                       </option>
                     ))
                   : null}
